@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -47,8 +48,15 @@ public class API {
             requests.add(new Request(a.startDate, a.endDate, a.instrumentID, a.topicCodes));
         }
 
-        for (Request r : requests) {
-            System.out.println(r.makeRequest());
+        try {
+            PrintWriter writer = new PrintWriter("output", "UTF-8");
+            for (Request r : requests) {
+                writer.println(r.makeRequest());
+            }
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error with document writer");
         }
     }
 

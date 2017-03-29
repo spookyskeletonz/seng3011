@@ -36,8 +36,8 @@ public class Request {
                 "?s\tfe:headLine\t?headline.\n" +
                 "?s\tfe:topicCode\t?topicCode.\n" +
                 "?s\tfe:languageOfNews\t\"en\".\n" +
-                "\t\tFILTER\t(?ric\t=\tANZ.AX)\n" + //instrument
-                "\t\tFILTER\t(?topicCode\t=\t\"ECB\")\n" + //topic code
+                "\t\tFILTER\t(?ric\t=\tins:ANZ.AX)\n" + //instrument
+                "\t\tFILTER\t(?topicCode\t=\t\"N2:ECB\")\n" + //topic code
                 "\t\tFILTER(xs:dateTime(?time)\t>\t\"2015-10-01T08:45:10.295Z\"^^xs:dateTime\t&&\txs:dateTime(?time)\t<=\t\n" + //start date
                 "\"2015-11-01T19:37:12.193Z\"^^xs:dateTime)\n" + //enddate
                 "}";

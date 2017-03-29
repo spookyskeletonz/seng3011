@@ -33,6 +33,9 @@ public class API {
             int x = 0;
             for (String s : temp2) {
                 input[x] = s.split("=")[1];
+                if (input[x].contains(",")) {
+                    a.error();
+                }
                 x++;
             }
             a.method = input[0];
@@ -43,6 +46,11 @@ public class API {
         }
 
         //Request r = new Request(m.startDate, m.endDate, m.instrumentID, m.topicCodes);
+    }
+
+    void error() {
+        System.out.println("Too many Instrument IDs or Topic Codes, max is 1");
+        System.exit(0);
     }
 
 }

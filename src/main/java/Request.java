@@ -36,10 +36,10 @@ public class Request {
                 "?s\tfe:headLine\t?headline.\n" +
                 "?s\tfe:topicCode\t?topicCode.\n" +
                 "?s\tfe:languageOfNews\t\"en\".\n" +
-                "\t\tFILTER\t(?ric\t=\t"+instrumentID+")\n" +
-                "\t\tFILTER\t(?topicCode\t=\t\""+topicCode+"\")\n" +
-                "\t\tFILTER(xs:dateTime(?time)\t>\t\""+startDate+"\"^^xs:dateTime\t&&\txs:dateTime(?time)\t<=\t\n" +
-                "\""+endDate+"\"^^xs:dateTime)\n" +
+                "\t\tFILTER\t(?ric\t=\tANZ.AX)\n" + //instrument
+                "\t\tFILTER\t(?topicCode\t=\t\"ECB\")\n" + //topic code
+                "\t\tFILTER(xs:dateTime(?time)\t>\t\"2015-10-01T08:45:10.295Z\"^^xs:dateTime\t&&\txs:dateTime(?time)\t<=\t\n" + //start date
+                "\"2015-11-01T19:37:12.193Z\"^^xs:dateTime)\n" + //enddate
                 "}";
 
         Authenticator.setDefault (new Authenticator() {
@@ -50,7 +50,7 @@ public class Request {
 
         try {
             String encodedQuery = URLEncoder.encode(query, "UTF-8");
-            String url = "http://adage.cse.unsw.edu.au:8005/v1/graphs/sparql?query=”"+encodedQuery+"”";
+            String url = "http://adage.cse.unsw.edu.au:8005/v1/graphs/sparql?query=\""+encodedQuery+"\"";
             URL obj = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
             conn.setRequestMethod("GET");

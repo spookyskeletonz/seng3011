@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -16,6 +17,7 @@ public class API {
 
     public static void main(String[] args) {
         API a = new API();
+        ArrayList<Request> requests = new ArrayList<Request>();
 
         Scanner sc = null;
         try
@@ -42,10 +44,12 @@ public class API {
             a.endDate = input[1];
             a.instrumentID = input[2];
             a.topicCodes = input[3];
+            requests.add(new Request(a.startDate, a.endDate, a.instrumentID, a.topicCodes));
         }
 
-        Request r = new Request(a.startDate, a.endDate, a.instrumentID, a.topicCodes);
-        System.out.println(r.makeRequest());
+        for (Request r : requests) {
+            System.out.println(r.makeRequest());
+        }
     }
 
     void error() {

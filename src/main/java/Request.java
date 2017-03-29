@@ -26,21 +26,23 @@ public class Request {
                 "PREFIX fe: <http://adage.cse.unsw.edu.au/ontology/financial-events#>\n" +
                 "PREFIX ins: <http://adage.cse.unsw.edu.au/resource/financial-events#>\n" +
                 "PREFIX xs: <http://www.w3.org/2001/XMLSchema#>\n" +
-                "SELECT ?s ?time ?headline ?newsBody \n" +
+                "\n" +
+                "SELECT ?s ?id ?time ?headline ?newsBody \n" +
                 "WHERE {\n" +
                 "?s w3:type fe:TRTHNewsEvent.\n" +
+                "?s fe:messageId ?id.\n" +
                 "?s fe:relatedRIC ?ric.\n" +
                 "?s fe:timeStamp ?t.\n" +
                 "?t fe:startTime ?time.\n" +
                 "?s fe:newsText ?newsBody.\n" +
                 "?s fe:headLine ?headline.\n" +
                 "?s fe:topicCode ?topicCode.\n" +
+                "?s fe:languageOfNews ?lang.\n" +
                 "?s fe:languageOfNews \"en\".\n" +
-                "  FILTER (?ric = ins:RIC_"+instrumentID+")\n" + //instrument
-                "  FILTER (?topicCode = \"N2:"+topicCode+"\")\n" + //topic code
-                "  FILTER(xs:dateTime(?time) > "+startDate+"^^xs:dateTime && xs:dateTime(?time) <= \n" + //start date
-                ""+endDate+"^^xs:dateTime)\n" + //enddate
-                "}";
+                "FILTER (?ric = ins:RIC_"+instrumentID+")\n" +
+                "FILTER (?topicCode = \"N2:"+topicCode+"\")\n" +
+                "FILTER(xs:dateTime(?time) > "+startDate+"^^xs:dateTime && xs:dateTime(?time) <= "+endDate+"^^xs:dateTime)\n" +
+                "}LIMIT 2";
 
         Authenticator.setDefault (new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {

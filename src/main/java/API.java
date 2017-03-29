@@ -26,10 +26,10 @@ public class API {
 
         while (sc.hasNext()) {
             String line = sc.nextLine();
-            String[] temp1 = line.split("\\?", 2);
-            String[] temp2 = temp1[1].split("&");
+            //String[] temp1 = line.split("\\?", 2);
+            String[] temp2 = line.split("&");
 
-            String[] input = new String[5];
+            String[] input = new String[4];
             int x = 0;
             for (String s : temp2) {
                 input[x] = s.split("=")[1];
@@ -38,14 +38,14 @@ public class API {
                 }
                 x++;
             }
-            a.method = input[0];
-            a.startDate = input[1];
-            a.endDate = input[2];
-            a.instrumentID = input[3];
-            a.topicCodes = input[4];
+            a.startDate = input[0];
+            a.endDate = input[1];
+            a.instrumentID = input[2];
+            a.topicCodes = input[3];
         }
 
-        //Request r = new Request(m.startDate, m.endDate, m.instrumentID, m.topicCodes);
+        Request r = new Request(a.startDate, a.endDate, a.instrumentID, a.topicCodes);
+        System.out.println(r.makeRequest());
     }
 
     void error() {

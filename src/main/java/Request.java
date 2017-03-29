@@ -2,9 +2,8 @@
  * Created by arunavsarkar on 29/3/17.
  */
 
-import java.net.MalformedURLException;
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.*;
 
 public class Request {
@@ -42,6 +41,12 @@ public class Request {
                 "\t\tFILTER(xs:dateTime(?time)\t>\t\""+startDate+"\"^^xs:dateTime\t&&\txs:dateTime(?time)\t<=\t\n" +
                 "\""+endDate+"\"^^xs:dateTime)\n" +
                 "}";
+
+        Authenticator.setDefault (new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication ("student", "studentML".toCharArray());
+            }
+        });
 
         try {
             String encodedQuery = URLEncoder.encode(query, "UTF-8");

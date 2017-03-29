@@ -49,7 +49,7 @@ public class API {
         }
 
         try {
-            PrintWriter writer = new PrintWriter("output", "UTF-8");
+            PrintWriter writer = new PrintWriter("output.txt", "UTF-8");
             for (Request r : requests) {
                 writer.println(r.makeRequest());
             }

@@ -26,7 +26,7 @@ public class API {
 
         while (sc.hasNext()) {
             String line = sc.nextLine();
-            String[] temp1 = line.split("\?", 2);
+            String[] temp1 = line.split("\\?", 2);
             String[] temp2 = temp1[1].split("&");
 
             String[] input = new String[5];

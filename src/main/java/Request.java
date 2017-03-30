@@ -4,7 +4,11 @@
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.net.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 public class Request {
 
@@ -44,17 +48,19 @@ public class Request {
                 "FILTER(xs:dateTime(?time) > "+startDate+"^^xs:dateTime && xs:dateTime(?time) <= "+endDate+"^^xs:dateTime)\n" +
                 "}LIMIT 2";
 
-        Authenticator.setDefault (new Authenticator() {
+        /*Authenticator.setDefault (new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication ("student", "studentML".toCharArray());
             }
-        });
+        });*/
 
         try {
             String encodedQuery = URLEncoder.encode(query, "UTF-8");
             String url = "http://adage.cse.unsw.edu.au:8005/v1/graphs/sparql?query=\""+encodedQuery+"\"";
             URL obj = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
+            String encoded = Base64.getEncoder().encodeToString(("student:studentML").getBytes(StandardCharsets.UTF_8));  //Java 8
+            conn.setRequestProperty("Authorization", "Basic "+encoded);
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/sparql-results+json");
             BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));

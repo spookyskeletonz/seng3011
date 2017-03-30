@@ -12,19 +12,22 @@ public class Request {
 
     private String startDate;
     private String endDate;
-    private String instrumentID;
-    private String topicCode;
+    private String instrumentID1;
+    private String instrumentID2;
+    private String topicCode1;
+    private String topicCode2;
 
-    public Request(String startDate, String endDate, String instrumentID, String topicCode){
+    public Request(String startDate, String endDate, String instrumentID1, String instrumentID2, String topicCode1, String topicCode2){
         this.startDate = startDate;
         this.endDate = endDate;
-        this.instrumentID = instrumentID;
-        this.topicCode = topicCode;
+        this.instrumentID1 = instrumentID1;
+        this.instrumentID2 = instrumentID2;
+        this.topicCode1 = topicCode1;
+        this.topicCode2 = topicCode2;
     }
 
     public String makeRequest(){
         StringBuilder result = new StringBuilder();
-        System.out.println(instrumentID+"|"+topicCode+"|"+startDate+"|"+endDate);
         String query = "PREFIX w3: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                 "PREFIX fe: <http://adage.cse.unsw.edu.au/ontology/financial-events#>\n" +
                 "PREFIX ins: <http://adage.cse.unsw.edu.au/resource/financial-events#>\n" +
@@ -42,8 +45,8 @@ public class Request {
                 "?s fe:topicCode ?topicCode.\n" +
                 "?s fe:languageOfNews ?lang.\n" +
                 "?s fe:languageOfNews \"en\".\n" +
-                "FILTER (?ric = ins:RIC_"+instrumentID+")\n" +
-                "FILTER (?topicCode = \"N2:"+topicCode+"\")\n" +
+                "FILTER (?ric = ins:RIC_"+instrumentID1+" || ?ric = ins:RIC_"+instrumentID2+")\n" +
+                "FILTER (?topicCode = \"N2:"+topicCode1+"\" || ?topicCode = \"N2:"+topicCode2+")\n" +
                 "FILTER(xs:dateTime(?time) > "+startDate+"^^xs:dateTime && xs:dateTime(?time) <= "+endDate+"^^xs:dateTime)\n" +
                 "}";
 

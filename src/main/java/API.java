@@ -36,9 +36,6 @@ public class API {
             int x = 0;
             for (String s : temp2) {
                 input[x] = s.split("=")[1];
-                if (input[x].contains(",")) {
-                    a.error();
-                }
                 x++;
             }
             a.startDate = input[0];

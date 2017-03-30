@@ -1,1 +1,1 @@
-ERROR: check exception stack trace
+{"head":{"vars":[]},"results":{"bindings":[]}}

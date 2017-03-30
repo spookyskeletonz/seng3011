@@ -46,7 +46,7 @@ public class Request {
                 "?s fe:languageOfNews ?lang.\n" +
                 "?s fe:languageOfNews \"en\".\n" +
                 "FILTER (?ric = ins:RIC_"+instrumentID1+" || ?ric = ins:RIC_"+instrumentID2+")\n" +
-                "FILTER (?topicCode = \"N2:"+topicCode1+"\" || ?topicCode = \"N2:"+topicCode2+")\n" +
+                "FILTER (?topicCode = \"N2:"+topicCode1+"\" || ?topicCode = \"N2:"+topicCode2+"\")\n" +
                 "FILTER(xs:dateTime(?time) > "+startDate+"^^xs:dateTime && xs:dateTime(?time) <= "+endDate+"^^xs:dateTime)\n" +
                 "}";
 

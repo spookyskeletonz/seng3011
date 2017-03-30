@@ -11,8 +11,10 @@ public class API {
     private String method;
     private String startDate;
     private String endDate;
-    private String instrumentID;
-    private String topicCodes;
+    private String instrumentID1;
+    private String instrumentID2;
+    private String topicCodes1;
+    private String topicCodes2;
 
     public API() {}
 
@@ -32,17 +34,31 @@ public class API {
             //String[] temp1 = line.split("\\?", 2);
             String[] temp2 = line.split("&");
 
-            String[] input = new String[4];
+            String[] input = new String[6];
             int x = 0;
             for (String s : temp2) {
                 input[x] = s.split("=")[1];
+                if (x == 2 || x == 4) {
+                    String[] temp3 = input[x].split(",");
+                    if (x == 2) {
+                        input[2] = temp3[0];
+                        input[3] = temp3[1];
+                        x = 3;
+                    } else if (x == 4) {
+                        input[4] = temp3[0];
+                        input[5] = temp3[1];
+                        break;
+                    }
+                }
                 x++;
             }
             a.startDate = input[0];
             a.endDate = input[1];
-            a.instrumentID = input[2];
-            a.topicCodes = input[3];
-            requests.add(new Request(a.startDate, a.endDate, a.instrumentID, a.topicCodes));
+            a.instrumentID1 = input[2];
+            a.instrumentID2 = input[3];
+            a.topicCodes1 = input[4];
+            a.topicCodes2 = input[5];
+            requests.add(new Request(a.startDate, a.endDate, a.instrumentID1, a.instrumentID2, a.topicCodes1, a.topicCodes2));
         }
 
         try {

@@ -40,15 +40,17 @@ public class API {
     public void log (boolean success, long startTime) {
         String succeeded = "Error";
         if (success) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy, HH:mm:ss:SS");
             Long endTime = System.currentTimeMillis();
-            succeeded = "Success\nStart Time = " + sdf.format(startTime) + "\nEnd Time:" + sdf.format(endTime) + "\nElapsed Time:" + (endTime-startTime) + "\nOutput file: log.txt";
+            succeeded = "Success\nStart Time: " + sdf.format(startTime) + "\nEnd Time: " + sdf.format(endTime) + "\nElapsed Time: " + (endTime-startTime) + " milliseconds\nOutput file: log.txt";
         }
         String file = "It's Gif Not Gif\nVersion 2.0\n" + succeeded;
 
         try {
-            BufferedWriter writer = Files.newBufferedWriter(Paths.get("/log.txt"));
+            BufferedWriter writer = Files.newBufferedWriter(Paths.get("./log.txt"));
             writer.write(file);
+            writer.flush();
+            writer.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

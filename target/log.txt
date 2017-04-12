@@ -1,0 +1,7 @@
+It's Gif Not Gif
+Version 2.0
+Success
+Start Time: 13/04/2017, 00:48:33:541
+End Time: 13/04/2017, 00:48:34:377
+Elapsed Time: 836 milliseconds
+Output file: log.txt

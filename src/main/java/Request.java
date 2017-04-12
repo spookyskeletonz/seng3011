@@ -24,8 +24,14 @@ public class Request {
     }
 
     public String makeRequest(){
-        String[] instrumentID = instrumentIDs.split(",");
-        String[] topicCode = topicCodes.split(",");
+        String[] instrumentID = {null};
+        if(instrumentIDs != null) {
+            instrumentID = instrumentIDs.split(",");
+        }
+        String[] topicCode = {null};
+        if(topicCodes != null){
+            topicCode = topicCodes.split(",");
+        }
 
         StringBuilder result = new StringBuilder();
 

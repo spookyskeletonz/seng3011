@@ -116,7 +116,7 @@ public class Request {
 
             return strResult;
         } catch (Exception e) {
-            return Arrays.toString(e.getStackTrace());
+            return Arrays.toString(e.getStackTrace()) + "\nERROR: check exception stack trace";
             //return "ERROR: check exception stack trace";
         }
     }

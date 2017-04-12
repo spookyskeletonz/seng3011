@@ -49,7 +49,9 @@ public class API {
         try {
             BufferedWriter writer = Files.newBufferedWriter(Paths.get("./log.txt"));
             writer.write(file);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            System.out.println("log print error");
+        }
     }
 
 }

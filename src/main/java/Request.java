@@ -83,7 +83,7 @@ public class Request {
             strResult = strResult.replaceAll("\\{\"id\":\\{.*?\"\\}", "\n\\{\n\"InstrumentID\": "+instrumentID1+","+instrumentID2 +"\"");
             strResult = strResult.replaceAll(",\"time\":\\{\"datatype\":\".*?\",\"",",\n\"TimeStamp\":");
             strResult = strResult.replaceAll("\\},\"headline\":\\{",",\n\"Headline\":");
-            strResult = strResult.replaceAll("\\},\"newsBody\":\\{",",\n\"\"NewsText\":");
+            strResult = strResult.replaceAll("\\},\"newsBody\":\\{",",\n\"NewsText\":");
             strResult = strResult.replaceAll("\\}\\},\n\\{\n\"InstrumentID\":","\n}\n{\n\"InstrumentID\":");
             strResult = strResult.replaceAll("\"\\}\\}\\]\\}\\}","\n]}");
 

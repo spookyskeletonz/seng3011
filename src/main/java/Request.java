@@ -8,27 +8,28 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 public class Request {
 
     private String startDate;
     private String endDate;
-    private String instrumentID1;
-    private String instrumentID2;
-    private String topicCode1;
-    private String topicCode2;
+    private String instrumentIDs;
+    private String topicCodes;
 
-    public Request(String startDate, String endDate, String instrumentID1, String instrumentID2, String topicCode1, String topicCode2){
+    public Request(String startDate, String endDate, String instrumentIDs, String topicCodes){
         this.startDate = startDate;
         this.endDate = endDate;
-        this.instrumentID1 = instrumentID1;
-        this.instrumentID2 = instrumentID2;
-        this.topicCode1 = topicCode1;
-        this.topicCode2 = topicCode2;
+        this.instrumentIDs = instrumentIDs;
+        this.topicCodes = topicCodes;
     }
 
     public String makeRequest(){
+        String[] instrumentID = instrumentIDs.split(",");
+        String[] topicCode = topicCodes.split(",");
+
         StringBuilder result = new StringBuilder();
+
         String query = "PREFIX w3: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                 "PREFIX fe: <http://adage.cse.unsw.edu.au/ontology/financial-events#>\n" +
                 "PREFIX ins: <http://adage.cse.unsw.edu.au/resource/financial-events#>\n" +
@@ -45,17 +46,37 @@ public class Request {
                 "?s fe:headLine ?headline.\n" +
                 "?s fe:topicCode ?topicCode.\n" +
                 "?s fe:languageOfNews ?lang.\n" +
-                "?s fe:languageOfNews \"en\".\n" +
-                "FILTER (?ric = ins:RIC_"+instrumentID1+" || ?ric = ins:RIC_"+instrumentID2+")\n" +
-                "FILTER (?topicCode = \"N2:"+topicCode1+"\" || ?topicCode = \"N2:"+topicCode2+"\")\n" +
-                "FILTER(xs:dateTime(?time) > "+startDate+"^^xs:dateTime && xs:dateTime(?time) <= "+endDate+"^^xs:dateTime)\n" +
-                "}";
+                "?s fe:languageOfNews \"en\".\n";
 
-        /*Authenticator.setDefault (new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication ("student", "studentML".toCharArray());
+        //this next logic will add the filters into the codes based on what instrument ID's and topic codes there are.
+        //if there are no instrument ID's or topic codes it will not add any filter
+        if(instrumentID[0] == null){
+            if(topicCode[0] != null) {
+                query += "FILTER (";
+                for (int topicCount = 0; topicCount <= topicCode.length - 1; topicCount++) {
+                    if(topicCount != 0) query += " || ";
+                    query += "?topicCode = \"N2:"+topicCode[topicCount]+"\"";
+                    if(topicCount == topicCode.length-1) query += ")\n";
+                }
             }
-        });*/
+        } else {
+            query += "FILTER (";
+            for (int instCount = 0; instCount <= instrumentID.length - 1; instCount++) {
+                if(instCount != 0) query += " || ";
+                query += "?ric = ins:RIC_"+instrumentID[instCount];
+                if(instCount == instrumentID.length-1) query += ")\n";
+            }
+            if(topicCode[0] != null) {
+                query += "FILTER (";
+                for (int topicCount = 0; topicCount <= topicCode.length - 1; topicCount++) {
+                    if(topicCount != 0) query += " || ";
+                    query += "?topicCode = \"N2:"+topicCode[topicCount]+"\"";
+                    if(topicCount == topicCode.length-1) query += ")\n";
+                }
+            }
+        }
+
+        query += "FILTER(xs:dateTime(?time) > \""+startDate+"\"^^xs:dateTime && xs:dateTime(?time) <= \""+endDate+"\"^^xs:dateTime)\n}";
 
         try {
             String encodedQuery = URLEncoder.encode(query, "UTF-8");
@@ -80,7 +101,7 @@ public class Request {
             strResult = strResult.replaceFirst("\\{\"head\":\\{\"vars\":\\[\"s\",\"id\",\"time\",\"headline\",\"newsBody\"\\]\\},\"results\":\\{\"bindings\":\\[", "{\n\"NewsDataSet\": [");
             strResult = strResult.replaceAll("\"type\":.*?:","");
             strResult = strResult.replaceAll("\\{\"s\":\\{.*?\"\\},","{" );
-            strResult = strResult.replaceAll("\\{\"id\":\\{.*?\"", "\n\\{\n\"InstrumentID\": "+instrumentID1+","+instrumentID2 +"\"");
+            strResult = strResult.replaceAll("\\{\"id\":\\{.*?\"", "\n\\{\n\"InstrumentID\": "+instrumentIDs+"\"");
             strResult = strResult.replaceAll("\\},\"time\":\\{\"datatype\":\".*?\",\"",",\n\"TimeStamp\":");
             strResult = strResult.replaceAll("\\},\"headline\":\\{",",\n\"Headline\":");
             strResult = strResult.replaceAll("\\},\"newsBody\":\\{",",\n\"\"NewsText\":");

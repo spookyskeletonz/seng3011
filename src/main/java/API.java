@@ -20,8 +20,14 @@ public class API {
         ArrayList<Request> requests = new ArrayList<Request>();
         a.startDate = args[0];
         a.endDate = args[1];
+        if(a.startDate == "NULL" || a.endDate == "NULL"){
+            System.out.println("Please enter start/end date");
+            return;
+        }
         a.instrumentIDs = args[2];
         a.topicCodes = args[3];
+        if(a.instrumentIDs == "-") a.instrumentIDs = "";
+        if(a.topicCodes == "-") a.topicCodes = "";
         requests.add(new Request(a.startDate, a.endDate, a.instrumentIDs, a.topicCodes));
         for (Request r : requests) {
                 System.out.println(r.makeRequest());

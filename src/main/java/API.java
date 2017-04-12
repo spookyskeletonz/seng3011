@@ -33,6 +33,7 @@ public class API {
         requests.add(new Request(a.startDate, a.endDate, a.instrumentIDs, a.topicCodes));
         for (Request r : requests) {
                 System.out.println(r.makeRequest());
+                a.log(true, startTime);
             }
     }
 

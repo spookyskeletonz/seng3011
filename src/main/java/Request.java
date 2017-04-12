@@ -2,6 +2,7 @@
  * Created by arunavsarkar on 29/3/17.
  */
 
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -73,7 +74,20 @@ public class Request {
                 result.append(line);
             }
             rd.close();
-            return result.toString();
+
+            String strResult =  result.toString();
+
+            strResult = strResult.replaceFirst("\\{\"head\":\\{\"vars\":\\[\"s\",\"id\",\"time\",\"headline\",\"newsBody\"\\]\\},\"results\":\\{\"bindings\":\\[", "{\n\"NewsDataSet\": [");
+            strResult = strResult.replaceAll("\"type\":.*?:","");
+            strResult = strResult.replaceAll("\\{\"s\":\\{.*?\"\\},","{" );
+            strResult = strResult.replaceAll("\\{\"id\":\\{.*?\"", "\n\\{\n\"InstrumentID\": "+instrumentID1+","+instrumentID2 +"\"");
+            strResult = strResult.replaceAll("\\},\"time\":\\{\"datatype\":\".*?\",\"",",\n\"TimeStamp\":");
+            strResult = strResult.replaceAll("\\},\"headline\":\\{",",\n\"Headline\":");
+            strResult = strResult.replaceAll("\\},\"newsBody\":\\{",",\n\"\"NewsText\":");
+            strResult = strResult.replaceAll("\\}\\},\n\\{\n\"InstrumentID\":","\n}\n{\n\"InstrumentID\":");
+            strResult = strResult.replaceAll("\"\\}\\}\\]\\}\\}","\n]}");
+
+            return strResult;
         } catch (Exception e) {
             e.printStackTrace();
             return "ERROR: check exception stack trace";

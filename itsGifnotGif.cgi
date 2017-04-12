@@ -49,8 +49,8 @@ eof
 }
 
 sub show_result{
-	$input = "start_date=\"".$start."\"\&end_date=\"".$end."\"&instrument_id=".$instrument."&topic_codes=".$topic;
-	$url = 	"api.cgi?".$input;
+	$input = "start_date=".$start."\&end_date=".$end."\&instrument_id=".$instrument."\&topic_codes=".$topic;
+	$url = 	"http://139.59.224.37/api/api.cgi?".$input;
 	print <<eof
 	You can find the output here: <br>
 	<a href=$url>here</a>

@@ -47,10 +47,10 @@ public class API {
         String file = "It's Gif Not Gif\nVersion 2.0\n" + succeeded;
 
         try {
-            BufferedWriter writer = Files.newBufferedWriter(Paths.get("./log.txt"));
+            BufferedWriter writer = Files.newBufferedWriter(Paths.get("/log.txt"));
             writer.write(file);
         } catch (Exception e) {
-            System.out.println("log print error");
+            e.printStackTrace();
         }
     }
 

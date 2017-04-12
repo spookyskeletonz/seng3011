@@ -26,8 +26,8 @@ public class API {
         }
         a.instrumentIDs = args[2];
         a.topicCodes = args[3];
-        if(a.instrumentIDs == "-") a.instrumentIDs = "";
-        if(a.topicCodes == "-") a.topicCodes = "";
+        if(a.instrumentIDs == "-") a.instrumentIDs = null;
+        if(a.topicCodes == "-") a.topicCodes = null;
         requests.add(new Request(a.startDate, a.endDate, a.instrumentIDs, a.topicCodes));
         for (Request r : requests) {
                 System.out.println(r.makeRequest());

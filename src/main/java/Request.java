@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Arrays;
 
 public class Request {
 
@@ -106,7 +107,7 @@ public class Request {
             strResult = strResult.replaceFirst("\\{\"head\":\\{\"vars\":\\[\"s\",\"id\",\"time\",\"headline\",\"newsBody\"\\]\\},\"results\":\\{\"bindings\":\\[", "{\n\"NewsDataSet\": [");
             strResult = strResult.replaceAll("\"type\":.*?:","");
             strResult = strResult.replaceAll("\\{\"s\":\\{.*?\"\\},","{" );
-            strResult = strResult.replaceAll("\\{\"id\":\\{.*?\"\\}", "\n\\{\n\"InstrumentIDs\": \""+instrumentID1+","+instrumentID2 +"\", \n\"Topic Codes\": \""+topicCode1 + "," + topicCode2 + "\"");
+            strResult = strResult.replaceAll("\\{\"id\":\\{.*?\"\\}", "\n\\{\n\"InstrumentIDs\": \""+instrumentIDs +"\", \n\"Topic Codes\": \""+ topicCodes + "\"");
             strResult = strResult.replaceAll(",\"time\":\\{\"datatype\":\".*?\",\"",",\n\"TimeStamp\": \"");
             strResult = strResult.replaceAll("\\},\"headline\":\\{",",\n\"Headline\":");
             strResult = strResult.replaceAll("\\},\"newsBody\":\\{",",\n\"NewsText\": ");
@@ -115,8 +116,8 @@ public class Request {
 
             return strResult;
         } catch (Exception e) {
-            e.printStackTrace();
-            return "ERROR: check exception stack trace";
+            return Arrays.toString(e.getStackTrace());
+            //return "ERROR: check exception stack trace";
         }
     }
 

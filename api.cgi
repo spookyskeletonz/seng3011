@@ -29,7 +29,7 @@ my $output = `@args`;
 
 print $query->header("text/plain");
 print "$output\n";
-print "$start_date\n";
-print "$end_date\n";
-print "$instrument_id\n";
-print "$topic_codes\n";
+#print "$start_date\n";
+#print "$end_date\n";
+#print "$instrument_id\n";
+#print "$topic_codes\n";

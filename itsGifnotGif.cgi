@@ -34,17 +34,17 @@ sub main() {
 sub enter_query{
 	print <<eof;
 	<form method="POST" action="">
-		Start Date (layout: yyyy-MM-ddTHH:mm:ss.SSSZ) <br>
-		<input type"text" name="Start" placeholder="yyyy-MM-ddTHH:mm:ss.SSSZ"> <br>
-		End Date (layout:  yyyy-MM-ddTHH:mm:ss.SSSZ):<br>
-		<input type="text" name="End" placeholder="yyyy-MM-ddTHH:mm:ss.SSSZ"> <br>
-		Instrument Id (layout: Exchange Ticker code + . + Exchange Identifier Code):<br>
-		<input type="text" name="instrument" placeholder="ANZ.AX, WOW.AX"> <br>
-		Topic Code (layout:  unique topic code ie. ECB):<br>
-		<input type="text" name="topic" placeholder="XXX"> <br>
-		<input type="submit" value="Search">
-	</form>
-	<br>
+        Start Date (layout: yyyy-MM-ddTHH:mm:ss.SSSZ) <br>
+        <input type"text" name="Start" placeholder="yyyy-MM-ddTHH:mm:ss.SSSZ"> <br>
+        End Date (layout:  yyyy-MM-ddTHH:mm:ss.SSSZ):<br>
+        <input type="text" name="End" placeholder="yyyy-MM-ddTHH:mm:ss.SSSZ"> <br>
+        Instrument Id (layout: Business Exchange Ticker code+.+Exchange Identifier Code, comma seperated without spaces ie. ANZ.AX, WOW.AX):<br>
+        <input type="text" name="instrument" placeholder="XXX.XX,XXX.XX"> <br>
+        Topic Code (layout:  unique topic codes being searched, comma seperated without spaces ie. AMERS,COM ):<br>
+        <input type="text" name="topic" placeholder="XXX,XXX"> <br>
+        <input type="submit" value="Search">
+    </form>
+    <br>
 eof
 }
 

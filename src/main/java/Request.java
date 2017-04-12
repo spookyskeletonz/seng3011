@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 
 public class Request {
 
@@ -104,7 +103,7 @@ public class Request {
             strResult = strResult.replaceAll("\\{\"id\":\\{.*?\"", "\n\\{\n\"InstrumentID\": "+instrumentIDs+"\"");
             strResult = strResult.replaceAll("\\},\"time\":\\{\"datatype\":\".*?\",\"",",\n\"TimeStamp\":");
             strResult = strResult.replaceAll("\\},\"headline\":\\{",",\n\"Headline\":");
-            strResult = strResult.replaceAll("\\},\"newsBody\":\\{",",\n\"\"NewsText\":");
+            strResult = strResult.replaceAll("\\},\"newsBody\":\\{",",\n\"NewsText\":");
             strResult = strResult.replaceAll("\\}\\},\n\\{\n\"InstrumentID\":","\n}\n{\n\"InstrumentID\":");
             strResult = strResult.replaceAll("\"\\}\\}\\]\\}\\}","\n]}");
 

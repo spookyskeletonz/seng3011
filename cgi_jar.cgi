@@ -11,7 +11,7 @@ my $topic_codes = $query->param('topic_codes');
 
 my $input = join " ", $start_date, $end_date, $instrument_id, $topic_codes;
 my $exe = glob "target/*.jar";
-my @args = ("java -jar target/", $exe, ".jar", $input);
+my @args = ("java -cp ", $exe, " API ", $input);
 my $output = `@args`;
 
 print $query->header("text/plain");

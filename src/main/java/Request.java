@@ -80,8 +80,8 @@ public class Request {
             strResult = strResult.replaceFirst("\\{\"head\":\\{\"vars\":\\[\"s\",\"id\",\"time\",\"headline\",\"newsBody\"\\]\\},\"results\":\\{\"bindings\":\\[", "{\n\"NewsDataSet\": [");
             strResult = strResult.replaceAll("\"type\":.*?:","");
             strResult = strResult.replaceAll("\\{\"s\":\\{.*?\"\\},","{" );
-            strResult = strResult.replaceAll("\\{\"id\":\\{.*?\"", "\n\\{\n\"InstrumentID\": "+instrumentID1+","+instrumentID2 +"\"");
-            strResult = strResult.replaceAll("\\},\"time\":\\{\"datatype\":\".*?\",\"",",\n\"TimeStamp\":");
+            strResult = strResult.replaceAll("\\{\"id\":\\{.*?\"\\}", "\n\\{\n\"InstrumentID\": "+instrumentID1+","+instrumentID2 +"\"");
+            strResult = strResult.replaceAll(",\"time\":\\{\"datatype\":\".*?\",\"",",\n\"TimeStamp\":");
             strResult = strResult.replaceAll("\\},\"headline\":\\{",",\n\"Headline\":");
             strResult = strResult.replaceAll("\\},\"newsBody\":\\{",",\n\"\"NewsText\":");
             strResult = strResult.replaceAll("\\}\\},\n\\{\n\"InstrumentID\":","\n}\n{\n\"InstrumentID\":");

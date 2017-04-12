@@ -4,15 +4,23 @@ use strict;
 
 my $query = new CGI;
 
-my $start_date = "NULL";
-my $end_date = "NULL";
-my $instrument_id = "-";
-my $topic_codes = "-";
+my $start_date = $query->param('start_date');
+my $end_date = $query->param('end_date');
+my $instrument_id = $query->param('instrument_id');
+my $topic_codes = $query->param('topic_codes');
 
-$start_date = $query->param('start_date');
-$end_date = $query->param('end_date');
-$instrument_id = $query->param('instrument_id');
-$topic_codes = $query->param('topic_codes');
+if ($start_date eq "") {
+    $start_date = "NULL";
+}
+if ($end_date eq "") {
+    $end_date = "NULL";
+}
+if ($instrument_id eq "") {
+    $instrument_id = "-";
+}
+if ($topic_codes eq "") {
+    $topic_codes = "-";
+}
 
 my $input = join " ", $start_date, $end_date, $instrument_id, $topic_codes;
 my $exe = glob "target/*.jar";

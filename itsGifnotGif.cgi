@@ -38,7 +38,7 @@ sub enter_query{
 		<input type"text" name="Start" placeholder="yyyy-MM-ddTHH:mm:ss.SSSZ"> <br>
 		End Date (layout:  yyyy-MM-ddTHH:mm:ss.SSSZ):<br>
 		<input type="text" name="End" placeholder="yyyy-MM-ddTHH:mm:ss.SSSZ"> <br>
-		Instrument Id (layout: “Exchange Ticker code” + “.” + “Exchange Identifier Code”):<br>
+		Instrument Id (layout: Exchange Ticker code + . + Exchange Identifier Code):<br>
 		<input type="text" name="instrument" placeholder="ANZ.AX, WOW.AX"> <br>
 		Topic Code (layout:  unique topic code ie. ECB):<br>
 		<input type="text" name="topic" placeholder="XXX"> <br>

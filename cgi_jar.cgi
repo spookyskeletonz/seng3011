@@ -21,3 +21,5 @@ my $output = `@args`;
 
 print $query->header("text/plain");
 print "$output\n";
+print "$instrument_id\n";
+print "$topic_codes\n";

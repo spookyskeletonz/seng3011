@@ -1,7 +1,13 @@
 {
     "Log": {
-        "Developer": "It's Gif Not Gif"
-        "Version": "2.0"
+        "Developer": "It's Gif Not Gif",
+        "Version": "2.0",
+        "Parameters": {
+            "Start Date": "t",
+            "End Dare": "2015-10-10T00:00:00.000Z",
+            "Instrument IDs": "BHP.AX,BLT.L",
+            "Topic Codes": "AMERS,COM"
+        }
         "Success": "false",
         "Error": "Invalid input/No output for given search terms",
         "Log File Name (if using JAR)": "log.txt"

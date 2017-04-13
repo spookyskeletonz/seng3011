@@ -1,0 +1,9 @@
+{
+    "Log": {
+        "Developer": "It's Gif Not Gif"
+        "Version": "2.0"
+        "Success": "false",
+        "Error": "Invalid input/No output for given search terms",
+        "Log File Name (if using JAR)": "log.txt"
+    }
+}

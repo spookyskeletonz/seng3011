@@ -32,28 +32,29 @@ public class API {
         if(a.topicCodes.equals("-")) a.topicCodes = null;
         requests.add(new Request(a.startDate, a.endDate, a.instrumentIDs, a.topicCodes));
         for (Request r : requests) {
-                System.out.println(r.makeRequest());
+                String s = r.makeRequest();
                 a.log(true, startTime);
+                System.out.println(s);
             }
     }
 
     public void log (boolean success, long startTime) {
-        String succeeded = "Error";
+        String succeeded = "\"Success\": \"false\"";
         if (success) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy, HH:mm:ss:SS");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
             Long endTime = System.currentTimeMillis();
-            succeeded = "Success\nStart Time: " + sdf.format(startTime) + "\nEnd Time: " + sdf.format(endTime) + "\nElapsed Time: " + (endTime-startTime) + " milliseconds\nOutput file: log.txt";
+            succeeded = "        \"Success\": \"true\",\n        \"Start Time\": \"" + sdf.format(startTime) + "\",\n        \"End Time\": \"" + sdf.format(endTime) + "\",\n        \"Elapsed Time\": \"" + (endTime-startTime) + " ms\"\n    }\n}";
         }
-        String file = "It's Gif Not Gif\nVersion 2.0\n" + succeeded;
-
-        try {
+        String file = "{\n    \"Log\": {\n        \"Owner\": \"It's Gif Not Gif\"\n        \"Version\": \"2.0\"\n" + succeeded;
+        System.out.println(file);
+        /*try {
             BufferedWriter writer = Files.newBufferedWriter(Paths.get("./log.txt"));
             writer.write(file);
             writer.flush();
             writer.close();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 }

@@ -105,6 +105,7 @@ public class Request {
             String strResult =  result.toString();
 
             strResult = strResult.replaceFirst("\\{\"head\":\\{\"vars\":\\[\"s\",\"id\",\"time\",\"headline\",\"newsBody\"\\]\\},\"results\":\\{\"bindings\":\\[", "{\n\"NewsDataSet\": [");
+            strResult = strResult.replaceAll("\\\\n", "\n");
             strResult = strResult.replaceAll("\"type\":.*?:","");
             strResult = strResult.replaceAll("\\{\"s\":\\{.*?\"\\},","{" );
             strResult = strResult.replaceAll("\\{\"id\":\\{.*?\"\\}", "\n\\{\n\"InstrumentIDs\": \""+instrumentIDs +"\", \n\"Topic Codes\": \""+ topicCodes + "\"");

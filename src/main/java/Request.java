@@ -70,7 +70,11 @@ public class Request {
             for (int instCount = 0; instCount <= instrumentID.length - 1; instCount++) {
                 if(instCount != 0) query += " || ";
                 query += "?ric = ins:RIC_"+instrumentID[instCount];
-                if(instCount == instrumentID.length-1) query += ")\n";
+                if(instCount == instrumentID.length-1){
+                    if(instCount == 0) query += " || ?ric = ins:RIC_";
+                    query += ")\n";
+                }
+
             }
             if(topicCode[0] != null) {
                 query += "FILTER (";

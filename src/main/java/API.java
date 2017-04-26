@@ -31,15 +31,21 @@ public class API {
         if(a.instrumentIDs.equals("-")) a.instrumentIDs = null;
         if(a.topicCodes.equals("-")) a.topicCodes = null;
         requests.add(new Request(a.startDate, a.endDate, a.instrumentIDs, a.topicCodes));
+        int count = 1;
         for (Request r : requests) {
-                String s = r.makeRequest();
-                if (s.length() <= 50) {
-                    a.log(false, startTime);
-                } else {
-                    a.log(true, startTime);
-                }
-                System.out.println(s);
+            String s;
+            if(count == 1){
+                s = r.makeRequest();
+            } else {
+                s = ","+r.makeRequest();
             }
+            System.out.println(s);
+            if (s.length() <= 50) {
+                a.log(false, startTime);
+            } else {
+                a.log(true, startTime);
+            }
+        }
     }
 
     public void log (boolean success, long startTime) {

@@ -3,13 +3,15 @@
         "Developer": "It's Gif Not Gif",
         "Version": "2.0",
         "Parameters": {
-            "Start Date": "t",
-            "End Dare": "2015-10-10T00:00:00.000Z",
-            "Instrument IDs": "BHP.AX,BLT.L",
-            "Topic Codes": "AMERS,COM"
+            "Start Date": "2015-10-01T00:00:00.000Z",
+            "End Date": "2015-10-10T00:00:00.000Z",
+            "Instrument IDs": "BHP.AX",
+            "Topic Codes": "COM"
         }
-        "Success": "false",
-        "Error": "Invalid input/No output for given search terms",
+        "Success": "true",
+        "Start Time": "2017-04-26 23:39:54.448",
+        "End Time": "2017-04-26 23:39:55.082",
+        "Elapsed Time": "634 ms",
         "Log File Name (if using JAR)": "log.txt"
     }
 }

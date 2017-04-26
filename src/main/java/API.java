@@ -39,12 +39,12 @@ public class API {
             } else {
                 s = ","+r.makeRequest();
             }
-            System.out.println(s);
             if (s.length() <= 50) {
                 a.log(false, startTime);
             } else {
                 a.log(true, startTime);
             }
+            System.out.println(s);
         }
     }
 

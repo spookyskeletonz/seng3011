@@ -49,7 +49,7 @@ public class API {
             Long endTime = System.currentTimeMillis();
             succeeded = "        \"Success\": \"true\",\n        \"Start Time\": \"" + sdf.format(startTime) + "\",\n        \"End Time\": \"" + sdf.format(endTime) + "\",\n        \"Elapsed Time\": \"" + (endTime-startTime) + " ms\"";
         }
-        String file = "{\n    \"Log\": {\n        \"Developer\": \"It's Gif Not Gif\",\n        \"Version\": \"3.2\",\n        \"Parameters\": {\n            \"Start Date\": \"" + startDate + "\",\n            \"End Date\": \"" + endDate + "\",\n            \"Instrument IDs\": \"" + instrumentIDs + "\",\n            \"Topic Codes\": \"" + topicCodes + "\"\n        }\n" + succeeded + ",\n        \"Log File Name (if using JAR)\": \"log.txt\"\n    }\n}";
+        String file = "{\n    \"Log\": {\n        \"Developer\": \"It's Gif Not Gif\",\n        \"Version\": \"3.1\",\n        \"Parameters\": {\n            \"Start Date\": \"" + startDate + "\",\n            \"End Date\": \"" + endDate + "\",\n            \"Instrument IDs\": \"" + instrumentIDs + "\",\n            \"Topic Codes\": \"" + topicCodes + "\"\n        }\n" + succeeded + ",\n        \"Log File Name (if using JAR)\": \"log.txt\"\n    }\n}";
         System.out.println(file);
         try {
             BufferedWriter writer = Files.newBufferedWriter(Paths.get("./log.txt"));

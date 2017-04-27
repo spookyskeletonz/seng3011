@@ -116,7 +116,7 @@ public class Request {
             strResult = strResult.replaceAll(",\"time\":\\{\"datatype\":\".*?\",\"",",\n\"TimeStamp\": \"");
             strResult = strResult.replaceAll("\\},\"headline\":\\{",",\n\"Headline\":");
             strResult = strResult.replaceAll("\\},\"newsBody\":\\{",",\n\"NewsText\": ");
-            strResult = strResult.replaceAll("\\}\\},\n\\{\n\"InstrumentIDs\":","\n}\n{\n\"InstrumentIDs\":");
+            strResult = strResult.replaceAll("\\}\\},\n\\{\n\"InstrumentIDs\":","\n},\n{\n\"InstrumentIDs\":");
             strResult = strResult.replaceAll("\"\\}\\}\\]\\}\\}","\n]}");
 
             return strResult;

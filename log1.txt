@@ -1,7 +1,7 @@
 [{
         "Log": {
             "Developer": "It's Gif Not Gif",
-            "Version": "3.2",
+            "Version": "4.0",
             "Parameters": {
                 "Start Date": "2015-10-01T00:00:00.000Z",
                 "End Date": "2015-10-10T00:00:00.000Z",
@@ -9,9 +9,9 @@
                 "Topic Codes": "COM"
             },
             "Success": "true",
-            "Start Time": "2017-05-09 23:52:08.774",
-            "End Time": "2017-05-09 23:52:09.633",
-            "Elapsed Time": "859 ms",
+            "Start Time": "2017-05-09 23:54:40.620",
+            "End Time": "2017-05-09 23:54:40.984",
+            "Elapsed Time": "364 ms",
             "Log File Name (if using JAR)": "log.txt"
         }
     },

@@ -110,16 +110,18 @@ public class Request {
 
             String strResult =  result.toString();
 
-            strResult = strResult.replaceFirst("\\{\"head\":\\{\"vars\":\\[\"s\",\"id\",\"time\",\"headline\",\"newsBody\"\\]\\},\"results\":\\{\"bindings\":\\[", "{\n    \"NewsDataSet\": [");
+            strResult = strResult.replaceFirst("\\{\"head\":\\{\"vars\":\\[\"s\",\"id\",\"time\",\"headline\",\"newsBody\"\\]\\},\"results\":\\{\"bindings\":\\[", "    {\n        \"NewsDataSet\": [");
             //strResult = strResult.replaceAll("\\\\n", "\n");
             strResult = strResult.replaceAll("\"type\":.*?:","");
             strResult = strResult.replaceAll("\\{\"s\":\\{.*?\"\\},","{" );
-            strResult = strResult.replaceAll("\\{\"id\":\\{.*?\"\\}", "\n    \\{\n        \"InstrumentIDs\": \"\", \n        \"Topic Codes\": \""+ topicCodes + "\"");
-            strResult = strResult.replaceAll(",\"time\":\\{\"datatype\":\".*?\",\"",",\n        \"TimeStamp\": \"");
-            strResult = strResult.replaceAll("\\},\"headline\":\\{",",\n        \"Headline\":");
-            strResult = strResult.replaceAll("\\},\"newsBody\":\\{",",\n        \"NewsText\": ");
+            strResult = strResult.replaceAll("\\{\"id\":\\{.*?\"\\}", "{\n                \"InstrumentIDs\": \"\", \n                \"Topic Codes\": \""+ topicCodes + "\"");
+            strResult = strResult.replaceAll(",\"time\":\\{\"datatype\":\".*?\",\"",",\n                \"TimeStamp\": \"");
+            strResult = strResult.replaceAll("\\},\"headline\":\\{",",\n                \"Headline\":");
+            strResult = strResult.replaceAll("\\},\"newsBody\":\\{",",\n                \"NewsText\": ");
             strResult = strResult.replaceAll("\\}\\},\n\\{\n\"InstrumentIDs\":",",\n{\n\"InstrumentIDs\":");
             strResult = strResult.replaceAll("\"\\}\\}\\]\\}\\}","\n]}");
+            strResult = strResult.replaceAll("\\}\\},", "\n            },\n            ");
+            strResult = strResult.replaceAll("\n\\]\\}", "\"\n            }\n        ]\n    }\n]");
 
             String[] newsText = strResult.split("\"NewsText\":");
             String instruments;
@@ -147,7 +149,6 @@ public class Request {
             for (int i = 1; i < newsText.length; i++) {
                 strResult += "\"NewsText\":" + newsText[i];
             }
-            strResult += "]";
 
             return strResult;
         } catch (Exception e) {

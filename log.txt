@@ -1,17 +1,17 @@
-{
+[{
     "Log": {
         "Developer": "It's Gif Not Gif",
-        "Version": "2.0",
+        "Version": "3.1",
         "Parameters": {
             "Start Date": "2015-10-01T00:00:00.000Z",
             "End Date": "2015-10-10T00:00:00.000Z",
             "Instrument IDs": "BHP.AX",
             "Topic Codes": "COM"
-        }
+        },
         "Success": "true",
-        "Start Time": "2017-04-26 23:39:54.448",
-        "End Time": "2017-04-26 23:39:55.082",
-        "Elapsed Time": "634 ms",
+        "Start Time": "2017-05-09 23:13:59.736",
+        "End Time": "2017-05-09 23:14:00.326",
+        "Elapsed Time": "590 ms",
         "Log File Name (if using JAR)": "log.txt"
     }
-}
+},

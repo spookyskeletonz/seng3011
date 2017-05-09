@@ -9,6 +9,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Request {
 
@@ -108,16 +110,44 @@ public class Request {
 
             String strResult =  result.toString();
 
-            strResult = strResult.replaceFirst("\\{\"head\":\\{\"vars\":\\[\"s\",\"id\",\"time\",\"headline\",\"newsBody\"\\]\\},\"results\":\\{\"bindings\":\\[", "{\n\"NewsDataSet\": [");
-            strResult = strResult.replaceAll("\\\\n", "\n");
+            strResult = strResult.replaceFirst("\\{\"head\":\\{\"vars\":\\[\"s\",\"id\",\"time\",\"headline\",\"newsBody\"\\]\\},\"results\":\\{\"bindings\":\\[", "{\n    \"NewsDataSet\": [");
+            //strResult = strResult.replaceAll("\\\\n", "\n");
             strResult = strResult.replaceAll("\"type\":.*?:","");
             strResult = strResult.replaceAll("\\{\"s\":\\{.*?\"\\},","{" );
-            strResult = strResult.replaceAll("\\{\"id\":\\{.*?\"\\}", "\n\\{\n\"InstrumentIDs\": \""+instrumentIDs +"\", \n\"Topic Codes\": \""+ topicCodes + "\"");
-            strResult = strResult.replaceAll(",\"time\":\\{\"datatype\":\".*?\",\"",",\n\"TimeStamp\": \"");
-            strResult = strResult.replaceAll("\\},\"headline\":\\{",",\n\"Headline\":");
-            strResult = strResult.replaceAll("\\},\"newsBody\":\\{",",\n\"NewsText\": ");
-            strResult = strResult.replaceAll("\\}\\},\n\\{\n\"InstrumentIDs\":","\n},\n{\n\"InstrumentIDs\":");
+            strResult = strResult.replaceAll("\\{\"id\":\\{.*?\"\\}", "\n    \\{\n        \"InstrumentIDs\": \"\", \n        \"Topic Codes\": \""+ topicCodes + "\"");
+            strResult = strResult.replaceAll(",\"time\":\\{\"datatype\":\".*?\",\"",",\n        \"TimeStamp\": \"");
+            strResult = strResult.replaceAll("\\},\"headline\":\\{",",\n        \"Headline\":");
+            strResult = strResult.replaceAll("\\},\"newsBody\":\\{",",\n        \"NewsText\": ");
+            strResult = strResult.replaceAll("\\}\\},\n\\{\n\"InstrumentIDs\":",",\n{\n\"InstrumentIDs\":");
             strResult = strResult.replaceAll("\"\\}\\}\\]\\}\\}","\n]}");
+
+            String[] newsText = strResult.split("\"NewsText\":");
+            String instruments;
+            for (int i = 1; i < newsText.length; i++) {
+                Pattern p = Pattern.compile("(<)(\\w+\\.\\w+)(>)");
+                instruments = " \"";
+                Matcher m = p.matcher(newsText[i]);
+                while (m.find()) {
+                    instruments += m.group(2) + ",";
+                }
+                instruments = instruments.substring(0, instruments.length() - 1);
+
+                String[] ids = newsText[i-1].split("\"InstrumentIDs\":");
+                String[] id = ids[1].split("\",");
+                id[0] = instruments;
+
+                ids[1] = id[0];
+                for (int j = 1; j < id.length; j++) {
+                    ids[1] += "\"," + id[j];
+                }
+                newsText[i-1] = ids[0] + "\"InstrumentIDs\":" + ids[1];
+            }
+
+            strResult = newsText[0];
+            for (int i = 1; i < newsText.length; i++) {
+                strResult += "\"NewsText\":" + newsText[i];
+            }
+            strResult += "]";
 
             return strResult;
         } catch (Exception e) {
